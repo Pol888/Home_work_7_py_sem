@@ -4,7 +4,7 @@ import os
 
 
 
-def bulk_file_renaming(name_of_files, number_of_digits_in_serial_number, expansion_of_initial, expansion_of_the_final,
+def bulk_file_renaming(path, name_of_files, number_of_digits_in_serial_number, expansion_of_initial, expansion_of_the_final,
     index_name_start=1, index_name_end=1):
 
     count = 1
@@ -12,9 +12,11 @@ def bulk_file_renaming(name_of_files, number_of_digits_in_serial_number, expansi
 
     index_name_start -= 1
     index_name_end -= 1
-
-    for i in os.listdir(os.path.join(os.getcwd())):
+    os.chdir(path)
+    for i in os.listdir(os.getcwd()):
         name_file = i[::-1].split('.', 1)[1][::-1]
+        print(os.path.isfile(i))
+
         if os.path.isfile(i) and i.split('.')[-1] == expansion_of_initial:
             new_name = ''
             if len(name_file) > index_name_end:
